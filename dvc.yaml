@@ -1,0 +1,36 @@
+stages:
+
+  ingest_data:
+    cmd: 
+    - curl -o ${base.raw_data_path}/train.parquet ${download.url_prefix}${download.train_dataset}.parquet
+    - curl -o ${base.raw_data_path}/test.parquet ${download.url_prefix}${download.test_dataset}.parquet
+    outs:
+    - data/raw/train.parquet
+    - data/raw/test.parquet
+    params:
+    - base
+    - download
+
+  data_load:
+    cmd: python src/data_load.py --config params.yaml
+    deps:
+    - data/raw
+    - src/data_load.py
+    outs:
+    - data/temp/train.feather
+    - data/temp/test.feather
+    params:
+    - base
+    - load_data
+
+  preprocess:
+    cmd: python src/preprocess_data.py --config params.yaml
+    deps:
+    - data/temp/
+    - src/preprocess_data.py
+    params:
+    - base
+    - preprocess
+    outs:
+    - data/processed/train.feather
+    - data/processed/test.feather

@@ -1,0 +1,31 @@
+base:
+  log_level: INFO
+  raw_data_path: data/raw
+  temp_data_path: data/temp
+  processed_data_path: data/processed
+
+download:
+  train_dataset: 2023-01
+  test_dataset: 2023-02
+  url_prefix: https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_
+
+load_data:
+  train: train.parquet
+  test: test.parquet
+  columns:
+  - PULocationID
+  - DOLocationID
+  - tpep_pickup_datetime
+  - tpep_dropoff_datetime
+  - passenger_count
+  - trip_distance
+  - fare_amount
+
+preprocess:
+  drop_outliers: false
+  create_dt_features: true
+  max_trip_distance: 300
+  min_trip_duration: 1
+  max_trip_duration: 180
+  max_avg_trip_speed: 200
+  min_fare_amount: 0
