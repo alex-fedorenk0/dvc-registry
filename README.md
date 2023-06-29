@@ -29,3 +29,4 @@ dvc.api.get_url(
     repo='https://github.com/alex-fedorenk0/dvc-registry.git',
     rev='v2_train-01-2023_test-02-2023_clean_no_outliers')
 ```
+
