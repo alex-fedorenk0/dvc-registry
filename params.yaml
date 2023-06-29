@@ -22,7 +22,7 @@ load_data:
   - fare_amount
 
 preprocess:
-  drop_outliers: false
+  drop_outliers: true
   create_dt_features: true
   max_trip_distance: 300
   min_trip_duration: 1
